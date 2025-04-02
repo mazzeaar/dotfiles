@@ -95,13 +95,9 @@ end)
 
 -- Open Spectre for global find/replace for the word under the cursor in normal mode
 -- TODO Fix, currently being overriden by Telescope
-nnoremap("<leader>sw", function()
-	require("spectre").open_visual({ select_word = true })
-end, { desc = "Search current word" })
-
--- Press 'H', 'L' to jump to start/end of a line (first/last char)
-nnoremap("L", "$")
-nnoremap("H", "^")
+-- nnoremap("<leader>sw", function()
+-- 	require("spectre").open_visual({ select_word = true })
+-- end, { desc = "Search current word" })
 
 -- Press 'U' for redo
 nnoremap("U", "<C-r>")
@@ -319,8 +315,8 @@ nnoremap("<leader>oc", function()
 end, { desc = "[O]pen [C]opilot panel" })
 
 -- nvim-ufo keybinds
--- nnoremap("zR", require("ufo").openAllFolds)
--- nnoremap("zM", require("ufo").closeAllFolds)
+nnoremap("zR", require("ufo").openAllFolds)
+nnoremap("zM", require("ufo").closeAllFolds)
 
 -- toggle inlay hints
 nnoremap("<leader>ih", function()
@@ -336,12 +332,8 @@ inoremap("JJ", "<esc>")
 -- Disable Space bar since it'll be used as the leader key
 vnoremap("<space>", "<nop>")
 
--- Press 'H', 'L' to jump to start/end of a line (first/last char)
-vnoremap("L", "$<left>")
-vnoremap("H", "^")
-
-vnoremap("<A-j>", ":m '>+1<CR>gv=gv")
-vnoremap("<A-k>", ":m '<-2<CR>gv=gv")
+-- vnoremap("<A-j>", ":m '>+1<CR>gv=gv")
+-- vnoremap("<A-k>", ":m '<-2<CR>gv=gv")
 
 -- Paste without losing the contents of the register
 xnoremap("<leader>p", '"_dP')
