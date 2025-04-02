@@ -79,6 +79,9 @@ return {
 					},
 				},
 				pyright = {},
+				clangd = {
+					cmd = { "clangd", "--clang-tidy", "--background-index" },
+				},
 			}
 
 			local formatters = {
