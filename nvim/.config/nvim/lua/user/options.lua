@@ -6,7 +6,7 @@ vim.opt.rnu = true
 
 -- Disable showing the mode below the statusline
 vim.opt.showmode = false
-    
+
 -- Set tabs to 4 spaces
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -76,7 +76,7 @@ vim.opt.foldtext = ""
 vim.opt.scrolloff = 8
 
 -- Place a column line
-vim.opt.colorcolumn = "80"
+-- vim.opt.colorcolumn = "80"
 
 vim.opt.guicursor = {
 	"n-v-c:block", -- Normal, visual, command-line: block cursor
