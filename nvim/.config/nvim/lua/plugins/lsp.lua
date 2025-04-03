@@ -60,7 +60,6 @@ return {
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
 				-- LSP Servers
-				bashls = {},
 				lua_ls = {
 					settings = {
 						Lua = {
@@ -79,14 +78,32 @@ return {
 					},
 				},
 				pyright = {},
+
+				cmake = {},
+				bashls = {},
 				clangd = {
-					cmd = { "clangd", "--clang-tidy", "--background-index" },
+					cmd = {
+						"clangd",
+						"--clang-tidy",
+						"--background-index",
+						"--completion-style=detailed",
+						"--header-insertion=iwyu",
+						"--suggest-missing-includes",
+						"--cross-file-rename",
+					},
+					root_dir = require("lspconfig.util").root_pattern(
+						"build/compile_commands.json",
+						"compile_flags.txt",
+						".git",
+						"CMakeLists.txt"
+					),
 				},
 			}
 
 			local formatters = {
 				prettierd = {},
 				stylua = {},
+				["clang-format"] = {},
 			}
 
 			local manually_installed_servers = { "clangd", "cmake", "pylsp" }
@@ -132,10 +149,23 @@ return {
 			require("lspconfig.ui.windows").default_options.border = "rounded"
 
 			-- Configure diagnostics border
-			vim.diagnostic.config({
-				float = {
-					border = "rounded",
-				},
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function()
+					vim.diagnostic.config({
+						virtual_text = {
+							prefix = "●",
+							spacing = 2,
+						},
+						signs = true,
+						underline = true,
+						severity_sort = true,
+						update_in_insert = false,
+						float = {
+							border = "rounded",
+							source = "always",
+						},
+					})
+				end,
 			})
 		end,
 	},
@@ -144,7 +174,7 @@ return {
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
 		opts = {
-			notify_on_error = false,
+			notify_on_error = true,
 			default_format_opts = {
 				async = true,
 				timeout_ms = 500,
@@ -159,8 +189,12 @@ return {
 				javascript = { "biome" },
 				typescript = { "biome" },
 				typescriptreact = { "biome" },
-				svelte = { "prettierd", "prettier " },
+				svelte = { "prettierd", "prettier" },
 				lua = { "stylua" },
+				c = { "clang-format" },
+				cpp = { "clang-format" },
+				objc = { "clang-format" },
+				proto = { "clang-format" },
 			},
 		},
 	},
