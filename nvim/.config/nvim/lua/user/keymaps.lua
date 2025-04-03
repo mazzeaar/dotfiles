@@ -68,8 +68,8 @@ nnoremap("<leader>ut", ":UndotreeToggle<CR>", { desc = "Toggle [U]ndo[T]ree " })
 -- Center buffer while navigating
 nnoremap("<C-u>", "<C-u>zz")
 nnoremap("<C-d>", "<C-d>zz")
-nnoremap("{", "{zz")
-nnoremap("}", "}zz")
+-- nnoremap("{", "{zz")
+-- nnoremap("}", "}zz")
 nnoremap("N", "Nzz")
 nnoremap("n", "nzz")
 nnoremap("G", "Gzz")
@@ -80,6 +80,15 @@ nnoremap("<C-o>", "<C-o>zz")
 nnoremap("%", "%zz")
 nnoremap("*", "*zz")
 nnoremap("#", "#zz")
+
+nnoremap("{", function()
+	vim.cmd("normal! [m")
+end)
+
+-- Jump to next function or block end
+nnoremap("}", function()
+	vim.cmd("normal! ]m")
+end)
 
 -- Press 'S' for quick find/replace for the word under the cursor
 nnoremap("S", function()
@@ -110,6 +119,10 @@ nnoremap("<leader>tw", function()
 end, { desc = "[T]oggle [Wrap]" })
 
 -- Diagnostics
+
+-- those suck, maybe use:
+-- <leader>g<type> to go down to next w/e/d
+-- <leader>G<type> to go up to previous w/e/d
 
 -- Goto next diagnostic of any severity
 nnoremap("]d", function()
@@ -179,11 +192,16 @@ nnoremap("<leader>=", "<C-w>=")
 
 -- Press leader f to format
 nnoremap("<leader>f", function()
-	conform.format({
-		async = true,
-		timeout_ms = 500,
-		lsp_format = "fallback",
-	})
+	local ok, conform = pcall(require, "conform")
+	if ok then
+		conform.format({
+			async = true,
+			timeout_ms = 500,
+			lsp_format = "fallback",
+		})
+	else
+		vim.notify("conform not loaded yet", vim.log.levels.WARN)
+	end
 end, { desc = "Format the current buffer" })
 
 -- Press leader rw to rotate open windows
@@ -193,7 +211,7 @@ nnoremap("<leader>rw", ":RotateWindows<cr>", { desc = "[R]otate [W]indows" })
 nnoremap("gx", ":sil !open <cWORD><cr>", { silent = true })
 
 -- TSC autocommand keybind to run TypeScripts tsc
-nnoremap("<leader>tc", ":TSC<cr>", { desc = "[T]ypeScript [C]ompile" })
+-- nnoremap("<leader>tc", ":TSC<cr>", { desc = "[T]ypeScript [C]ompile" })
 
 -- Harpoon keybinds --
 -- Open harpoon ui
