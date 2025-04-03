@@ -26,6 +26,7 @@ return {
 			git = { enabled = true },
 			gitbrowse = { enabled = true },
 			indent = { enabled = true },
+			animate = { enabled = true },
 			notifier = {
 				enabled = true,
 				timeout = 3000,
@@ -118,13 +119,13 @@ return {
 				desc = "Toggle [Z]en Mode",
 			},
 
-			{
-				"<leader>ln",
-				function()
-					Snacks.toggle.option("relativenumber", { name = "Relative Number" }):toggle()
-				end,
-				desc = "Toggle Relative [L]ine [N]umbers",
-			},
+			-- {
+			--	"<leader>ln",
+			--	function()
+			--		Snacks.toggle.option("relativenumber", { name = "Relative Number" }):toggle()
+			--	end,
+			--	desc = "Toggle Relative [L]ine [N]umbers",
+			--},
 			{
 				"<leader>cl",
 				function()
@@ -132,13 +133,13 @@ return {
 				end,
 				desc = "Toggle [C]ursor [L]ine",
 			},
-			{
-				"<leader>td",
-				function()
-					Snacks.toggle.diagnostics():toggle()
-				end,
-				desc = "[T]oggle [D]iagnostics",
-			},
+			--{
+			--	"<leader>td",
+			--	function()
+			--		Snacks.toggle.diagnostics():toggle()
+			--	end,
+			--	desc = "[T]oggle [D]iagnostics",
+			--},
 			{
 				"<leader>tt",
 				function()
