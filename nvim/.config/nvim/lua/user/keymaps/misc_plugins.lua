@@ -1,26 +1,12 @@
 return function()
     local nnoremap = require("user.keymaps.utils").nnoremap
 
-    -- Map Oil to <leader>e
-    nnoremap("<leader>e", function()
-        require("oil").toggle_float()
-    end)
+    nnoremap("<leader>e", require("oil").toggle_float, { desc = "Open file tree" })
+    nnoremap("<leader>S", require("spectre").toggle, { desc = "Global find/replace" })
 
-    -- Open Spectre for global find/replace
-    nnoremap("<leader>S", function()
-        require("spectre").toggle()
-    end)
+    nnoremap("zR", require("ufo").openAllFolds, { desc = "Open all folds" })
+    nnoremap("zM", require("ufo").closeAllFolds, { desc = "Close all folds" })
 
-    -- Open Copilot panel
-    nnoremap("<leader>oc", function()
-        require("copilot.panel").open({})
-    end, { desc = "[O]pen [C]opilot panel" })
-
-    -- nvim-ufo keybinds
-    nnoremap("zR", require("ufo").openAllFolds)
-    nnoremap("zM", require("ufo").closeAllFolds)
-
-    -- Press leader f to format
     nnoremap("<leader>f", function()
         local ok, conform = pcall(require, "conform")
         if ok then
@@ -34,8 +20,13 @@ return function()
         end
     end, { desc = "Format the current buffer" })
 
+    --[[unused for now
+        nnoremap("<leader>oc", function()
+            require("copilot.panel").open({})
+        end, { desc = "[O]pen [C]opilot panel" })
 
-    nnoremap("<leader>tw", function()
-        Snacks.toggle.option("wrap")
-    end, { desc = "[T]oggle [Wrap]" })
+        nnoremap("<leader>tw", function()
+            Snacks.toggle.option("wrap")
+        end, { desc = "[T]oggle [Wrap]" })
+    ]] --
 end

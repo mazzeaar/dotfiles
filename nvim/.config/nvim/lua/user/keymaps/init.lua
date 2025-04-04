@@ -4,6 +4,8 @@ M.utils = require("user.keymaps.utils")
 
 local keymap_modules = {
     "general",
+    "window",
+    "terminal",
     "keymaps",
     "misc_plugins",
     "telescope",

@@ -15,42 +15,9 @@ return function()
     -- Disable Space bar since it'll be used as the leader key
     nnoremap("<space>", "<nop>")
 
-    -- Window +  better kitty navigation
-    nnoremap("<C-j>", function()
-        if vim.fn.exists(":NvimTmuxNavigateDown") ~= 0 then
-            vim.cmd.NvimTmuxNavigateDown()
-        else
-            vim.cmd.wincmd("j")
-        end
-    end)
-
-    nnoremap("<C-k>", function()
-        if vim.fn.exists(":NvimTmuxNavigateUp") ~= 0 then
-            vim.cmd.NvimTmuxNavigateUp()
-        else
-            vim.cmd.wincmd("k")
-        end
-    end)
-
-    nnoremap("<C-l>", function()
-        if vim.fn.exists(":NvimTmuxNavigateRight") ~= 0 then
-            vim.cmd.NvimTmuxNavigateRight()
-        else
-            vim.cmd.wincmd("l")
-        end
-    end)
-
-    nnoremap("<C-h>", function()
-        if vim.fn.exists(":NvimTmuxNavigateLeft") ~= 0 then
-            vim.cmd.NvimTmuxNavigateLeft()
-        else
-            vim.cmd.wincmd("h")
-        end
-    end)
 
     -- Swap between last two buffers
     nnoremap("<leader>'", "<C-^>", { desc = "Switch to last buffer" })
-
 
     -- Map Undotree to <leader>
     nnoremap("<leader>ut", ":UndotreeToggle<CR>", { desc = "Toggle [U]ndo[T]ree " })
@@ -87,36 +54,8 @@ return function()
         vim.api.nvim_feedkeys(keys, "n", false)
     end)
 
-    -- Press 'U' for redo
-    nnoremap("U", "<C-r>")
 
-    -- Map MaximizerToggle (szw/vim-maximizer) to leader-m
-    nnoremap("<leader>m", ":MaximizerToggle<cr>")
 
-    -- Resize split windows to be equal size
-    nnoremap("<leader>=", "<C-w>=")
-
-    -- Press leader rw to rotate open windows
-    nnoremap("<leader>rw", ":RotateWindows<cr>", { desc = "[R]otate [W]indows" })
-
-    -- Press gx to open the link under the cursor
-    nnoremap("gx", ":sil !open <cWORD><cr>", { silent = true })
-
-    -- TSC autocommand keybind to run TypeScripts tsc
-    -- nnoremap("<leader>tc", ":TSC<cr>", { desc = "[T]ypeScript [C]ompile" })
-
-    -- Symbol Outline keybind
-    nnoremap("<leader>so", ":SymbolsOutline<cr>")
-
-    -- toggle inlay hints
-    nnoremap("<leader>ih", function()
-        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
-    end)
-
-    -- Insert --
-    -- Map jj and JJ to <esc>
-    inoremap("jj", "<esc>")
-    inoremap("JJ", "<esc>")
 
     -- Visual --
     -- Disable Space bar since it'll be used as the leader key
@@ -140,19 +79,19 @@ return function()
         vim.cmd("normal! gv")
     end)
 
-    -- Terminal --
-    -- Enter normal mode while in a terminal
-    tnoremap("<esc>", [[<C-\><C-n>]])
-    tnoremap("jj", [[<C-\><C-n>]])
-
-    -- Window navigation from terminal
-    tnoremap("<C-h>", [[<Cmd>wincmd h<CR>]])
-    tnoremap("<C-j>", [[<Cmd>wincmd j<CR>]])
-    tnoremap("<C-k>", [[<Cmd>wincmd k<CR>]])
-    tnoremap("<C-l>", [[<Cmd>wincmd l<CR>]])
 
     -- Reenable default <space> functionality to prevent input delay
     tnoremap("<space>", "<space>")
+    --[[unused for now
+
+    -- toggle inlay hints
+    nnoremap("<leader>ih", function()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
+    end)
+
+    -- Symbol Outline keybind
+    nnoremap("<leader>so", ":SymbolsOutline<cr>")
+--]]
 
     return M
 end
