@@ -16,16 +16,16 @@ return {
             enable_short_hex = false,
 
             ---Highlight rgb colors, e.g. 'rgb(0 0 0)'
-            enable_rgb = true,
+            enable_rgb = false,
 
             ---Highlight hsl colors, e.g. 'hsl(150deg 30% 40%)'
             enable_hsl = false,
 
             ---Highlight CSS variables, e.g. 'var(--testing-color)'
-            enable_var_usage = true,
+            enable_var_usage = false,
 
             ---Highlight named colors, e.g. 'green'
-            enable_named_colors = true,
+            enable_named_colors = false,
 
             ---Highlight tailwind colors, e.g. 'bg-blue-500'
             enable_tailwind = false,
