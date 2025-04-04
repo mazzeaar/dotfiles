@@ -47,16 +47,22 @@ return {
 					component_separators = { left = "", right = "" },
 					section_separators = { left = "█", right = "█" },
 				},
+
 				sections = {
+					-- git and harpoon infos
 					lualine_b = {
 						{ "branch", icon = "", fmt = truncate_branch_name },
 						harpoon_component,
 						"diff",
 						"diagnostics",
 					},
+
+					-- current file path
 					lualine_c = {
 						{ "filename", path = 1 },
 					},
+
+					-- filetype
 					lualine_x = {
 						"filetype",
 					},
