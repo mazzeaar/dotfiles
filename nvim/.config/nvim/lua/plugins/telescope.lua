@@ -26,14 +26,49 @@ return {
                             ["<C-x>"] = actions.delete_buffer,
                         },
                     },
+
                     file_ignore_patterns = {
                         "node_modules",
                         "yarn.lock",
-                        ".git",
                         ".sl",
                         "_build",
                         ".next",
+
+                        -- dotfiles --
+                        ".git",
+                        ".clang-tidy",
+                        ".clang-format",
+                        "%.clangd$", -- clangd hidden file
+
+                        -- folders --
+                        "cmake%-build.-/", -- CMake out-of-source builds
+                        "build/",          -- generic build folder
+                        "bin/",            -- binaries
+                        "obj/",            -- object files
+                        "%.vscode/",       -- VSCode settings
+                        "%.idea/",         -- CLion settings
+                        "%.git/",          -- git internals
+
+                        -- files --
+                        "%.o$",        -- object files
+                        "%.a$",        -- static libs
+                        "%.so$",       -- shared libs
+                        "%.d$",        -- dependency files
+                        "%.gch$",      -- precompiled headers
+                        "%.gcno$",     -- gcov profiling
+                        "%.gcda$",
+                        "%.out$",      -- default output files
+                        "%.exe$",      -- Windows binaries
+                        "%.log$",      -- logs
+                        "%.cache$",    -- cached files
+                        "%.DS_Store$", -- macOS metadata
+                        "compile_commands%.json",
+                        "%.cmake",     -- cmake generated files
+
+                        -- misc --
+                        "node_modules/", -- just in case
                     },
+
                     hidden = true,
                     path_display = {
                         "filename_first",
