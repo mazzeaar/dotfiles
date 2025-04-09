@@ -4,8 +4,6 @@ BasedOnStyle: Google
 ColumnLimit: 100
 IndentWidth: 4
 
-DisableFormat: true
-
 AlignConsecutiveMacros: true
 AlignConsecutiveAssignments: true
 AlignConsecutiveDeclarations: true
