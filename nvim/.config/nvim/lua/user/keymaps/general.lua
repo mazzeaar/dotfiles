@@ -1,10 +1,6 @@
 return function()
     local utils = require("user.keymaps.utils")
 
-    local vnoremap = utils.vnoremap
-    local tnoremap = utils.tnoremap
-    local xnoremap = utils.xnoremap
-
     -- Normal --
     local nnoremap = utils.nnoremap
 
