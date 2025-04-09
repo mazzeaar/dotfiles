@@ -5,7 +5,6 @@ return function()
 
     local nnoremap = utils.nnoremap
     local vnoremap = utils.vnoremap
-    local inoremap = utils.inoremap
     local tnoremap = utils.tnoremap
     local xnoremap = utils.xnoremap
 
@@ -38,14 +37,14 @@ return function()
     nnoremap("*", "*zz")
     nnoremap("#", "#zz")
 
-    nnoremap("{", function()
-        vim.cmd("normal! [m")
-    end)
+    -- nnoremap("{", function()
+    --     vim.cmd("normal! [m")
+    -- end)
 
     -- Jump to next function or block end
-    nnoremap("}", function()
-        vim.cmd("normal! ]m")
-    end)
+    -- nnoremap("}", function()
+    --     vim.cmd("normal! ]m")
+    -- end)
 
     -- Press 'S' for quick find/replace for the word under the cursor
     nnoremap("S", function()
