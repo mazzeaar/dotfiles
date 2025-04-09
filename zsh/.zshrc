@@ -2,11 +2,14 @@
 autoload -Uz compinit
 compinit
 
+bindkey -v
+export KEYTIMEOUT=1
+
 #initialize starship
 eval "$(starship init zsh)"
 
 #alias for parallel make
-alias makep="make -j14"
+alias makep="make -j8"
 
 #enable colors for ls
 alias ls="ls -G"
