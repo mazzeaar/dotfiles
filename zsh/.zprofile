@@ -1,8 +1,8 @@
 # Homebrew 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# Python 3.10 (if not using pyenv or Homebrew Python)
-# export PATH="$PATH:/Library/Frameworks/Python.framework/Versions/3.10/bin"
+# export LLVM
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
 # VS Code CLI
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"

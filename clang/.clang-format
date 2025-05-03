@@ -1,16 +1,17 @@
-Language: Cpp
 BasedOnStyle: Google
 
-ColumnLimit: 100
+ColumnLimit: 150
 IndentWidth: 4
 
 AlignConsecutiveMacros: true
 AlignConsecutiveAssignments: true
 AlignConsecutiveDeclarations: true
 AlignTrailingComments: true
-AllowShortBlocksOnASingleLine: true
+
+AllowShortBlocksOnASingleLine: false
 AllowShortCaseLabelsOnASingleLine: true
 AllowShortLoopsOnASingleLine: true
+
 AlwaysBreakBeforeMultilineStrings: false
 AlwaysBreakTemplateDeclarations: MultiLine
 BreakBeforeTernaryOperators: true
@@ -24,8 +25,10 @@ MaxEmptyLinesToKeep: 1
 NamespaceIndentation: All
 ReflowComments: true
 SortUsingDeclarations: false
+
 SpaceAfterCStyleCast: true
 SpaceAfterTemplateKeyword: true
+
 SpaceBeforeAssignmentOperators: true
 SpaceBeforeCpp11BracedList: false
 SpaceBeforeCtorInitializerColon: true

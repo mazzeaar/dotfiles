@@ -1,6 +1,21 @@
+-- lua/plugins/lsp/utils.lua
+
 local M = {}
 
 local scan = require("plenary.scandir")
+function M.toggle_diagnostics()
+	diagnostics_enabled = not diagnostics_enabled
+	vim.diagnostic.config({
+		virtual_text = diagnostics_enabled and { prefix = "●", spacing = 2 } or false,
+		signs = diagnostics_enabled,
+		underline = diagnostics_enabled,
+		update_in_insert = false,
+		severity_sort = true,
+		float = { border = "rounded", source = "always" },
+	})
+
+	vim.notify("Diagnostics " .. (diagnostics_enabled and "enabled" or "disabled"), vim.log.levels.INFO)
+end
 
 function M.safe_map_lsp_keybinds(bufnr)
 	local ok, keymaps = pcall(require, "user.keymaps")
