@@ -59,21 +59,21 @@ return {
 				function()
 					Snacks.scratch()
 				end,
-				desc = "Toggle Scratch Buffer",
+				desc = "Scratch Buffer",
 			},
 			{
 				"<leader>gb",
 				function()
 					Snacks.git.blame_line()
 				end,
-				desc = "[G]it [B]lame Line",
+				desc = "Git Blame",
 			},
 			{
 				"<leader>go",
 				function()
 					Snacks.gitbrowse()
 				end,
-				desc = "[G]it [O]pen",
+				desc = "Git Open",
 				mode = { "n", "v" },
 			},
 			{
@@ -81,59 +81,14 @@ return {
 				function()
 					Snacks.notifier.show_history()
 				end,
-				desc = "[N]otification [H]istory",
+				desc = "Notification History",
 			},
 			{
 				"<leader>z",
 				function()
 					Snacks.toggle.dim():toggle()
 				end,
-				desc = "TOGGLE ZEN MODE!!!!!",
-			},
-			{
-				"<leader>cl",
-				function()
-					Snacks.toggle.option("cursorline", { name = "Cursor Line" }):toggle()
-				end,
-				desc = "Toggle [C]ursor [L]ine",
-			},
-			{
-				"<leader>tt",
-				function()
-					local tsc = require("treesitter-context")
-					Snacks.toggle({
-						name = "Treesitter Context",
-						get = tsc.enabled,
-						set = function(state)
-							if state then
-								tsc.enable()
-							else
-								tsc.disable()
-							end
-						end,
-					}):toggle()
-				end,
-				desc = "[T]oggle [T]reesitter Context",
-			},
-			{
-				"<leader>hl",
-				function()
-					local hc = require("nvim-highlight-colors")
-					Snacks.toggle({
-						name = "Highlight Colors",
-						get = function()
-							return hc.is_active()
-						end,
-						set = function(state)
-							if state then
-								hc.turnOn()
-							else
-								hc.turnOff()
-							end
-						end,
-					}):toggle()
-				end,
-				desc = "Toggle [H]igh[L]ight Colors",
+				desc = "Zen Mode",
 			},
 		},
 	},
