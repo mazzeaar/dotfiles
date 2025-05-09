@@ -1,8 +1,17 @@
 -- nvim/lua/user/keymaps.lua
 
-local nnoremap = require("user.old_keymaps.utils").nnoremap
-local tnoremap = require("user.old_keymaps.utils").tnoremap
-local xnoremap = require("user.old_keymaps.utils").xnoremap
+local function bind(op, outer_opts)
+	outer_opts = vim.tbl_extend("force", { noremap = true, silent = true }, outer_opts or {})
+
+	return function(lhs, rhs, opts)
+		opts = vim.tbl_extend("force", outer_opts, opts or {})
+		vim.keymap.set(op, lhs, rhs, opts)
+	end
+end
+
+local nnoremap = bind("n")
+local xnoremap = bind("x")
+local tnoremap = bind("t")
 
 -- === QUALITY OF LIFE ===
 nnoremap("U", "<C-r>", { desc = "undo-undo" })
@@ -18,7 +27,7 @@ nnoremap("<leader>e", function()
 end, { desc = "Open file tree" })
 
 nnoremap("<leader>td", function()
-	require("plugins.lsp.utils").toggle_diagnostics()
+	require("plugins.lsp").toggle_diagnostics()
 end, { desc = "Toggle LSP Diagnostics" })
 
 nnoremap("<leader>d", function()
@@ -57,6 +66,8 @@ nnoremap("<C-h>", function()
 		vim.cmd.wincmd("h")
 	end
 end, { desc = "Window: left" })
+
+nnoremap("<leader>m", ":MaximizerToggle<cr>", { desc = "Window: Maximize" })
 
 -- === TERMINAL ===
 tnoremap("<esc>", [[<C-\><C-n>]], { desc = "Terminal: normal mode" })
@@ -108,13 +119,32 @@ nnoremap("<leader>ff", function()
 end, { desc = "Telescope: find files" })
 
 -- === EXPERIMENTAL: LSP ===
-nnoremap("<leader>gd", vim.lsp.buf.definition, { desc = "LSP: Go to definition" })
-nnoremap("<leader>gr", vim.lsp.buf.references, { desc = "LSP: Show references" })
-nnoremap("<leader>gi", vim.lsp.buf.implementation, { desc = "LSP: Go to implementation" })
-nnoremap("<leader>gt", vim.lsp.buf.type_definition, { desc = "LSP: Go to type definition" })
-nnoremap("<leader>rn", vim.lsp.buf.rename, { desc = "LSP: Rename symbol" })
-nnoremap("<leader>ca", vim.lsp.buf.code_action, { desc = "LSP: Code action" })
-nnoremap("K", vim.lsp.buf.hover, { desc = "LSP: Hover documentation" })
-nnoremap("gD", vim.lsp.buf.declaration, { desc = "LSP: Go to declaration" })
-nnoremap("[d", vim.diagnostic.goto_prev, { desc = "LSP: Previous diagnostic" })
-nnoremap("]d", vim.diagnostic.goto_next, { desc = "LSP: Next diagnostic" })
+local M = {}
+
+function M.map_lsp_keybinds(bufnr)
+	local opts = { buffer = bufnr }
+
+	nnoremap("<leader>gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "LSP: Go to definition" }))
+	nnoremap("<leader>gD", vim.lsp.buf.declaration, vim.tbl_extend("force", opts, { desc = "LSP: Go to declaration" }))
+	nnoremap(
+		"<leader>gi",
+		vim.lsp.buf.implementation,
+		vim.tbl_extend("force", opts, { desc = "LSP: Go to implementation" })
+	)
+
+	nnoremap("<leader>gr", vim.lsp.buf.references, vim.tbl_extend("force", opts, { desc = "LSP: Show references" }))
+	nnoremap(
+		"<leader>gt",
+		vim.lsp.buf.type_definition,
+		vim.tbl_extend("force", opts, { desc = "LSP: Go to type definition" })
+	)
+	nnoremap("<leader>rn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "LSP: Rename symbol" }))
+	nnoremap("<leader>ca", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "LSP: Code action" }))
+	nnoremap("K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "LSP: Hover documentation" }))
+
+	-- TODO: find better maps for this
+	nnoremap("[d", vim.diagnostic.goto_prev, vim.tbl_extend("force", opts, { desc = "LSP: Previous diagnostic" }))
+	nnoremap("]d", vim.diagnostic.goto_next, vim.tbl_extend("force", opts, { desc = "LSP: Next diagnostic" }))
+end
+
+return M
