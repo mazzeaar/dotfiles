@@ -25,19 +25,10 @@ return function()
 	diagnostic_nav("]w", "next", severity.WARN, "Next Warning")
 	diagnostic_nav("[w", "prev", severity.WARN, "Prev Warning")
 
-	nnoremap("<leader>d", function()
-		diagnostic.open_float({
-			border = "rounded",
-		})
-	end, { desc = "Open the diagnostic under the cursor in a float window" })
-
 	nnoremap("<leader>ld", diagnostic.setqflist, { desc = "Quickfix [L]ist [D]iagnostics" })
 	nnoremap("<leader>cn", ":cnext<cr>zz", { desc = "Navigate to next qflist item" })
 	nnoremap("<leader>cp", ":cprevious<cr>zz", { desc = "Navigate to previos qflist item" })
 	nnoremap("<leader>co", ":copen<cr>zz", { desc = "Open the qflist" })
 	nnoremap("<leader>cc", ":cclose<cr>zz", { desc = "Close the qflist" })
 
-	vim.keymap.set("n", "<leader>td", function()
-		require("plugins.lsp.utils").toggle_diagnostics()
-	end, { desc = "Toggle LSP Diagnostics" })
 end

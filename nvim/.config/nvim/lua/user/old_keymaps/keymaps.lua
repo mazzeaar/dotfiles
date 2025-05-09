@@ -46,11 +46,6 @@ return function()
 	-- end)
 
 	-- Press 'S' for quick find/replace for the word under the cursor
-	nnoremap("S", function()
-		local cmd = ":%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>"
-		local keys = vim.api.nvim_replace_termcodes(cmd, true, false, true)
-		vim.api.nvim_feedkeys(keys, "n", false)
-	end)
 
 	-- Visual --
 	-- Disable Space bar since it'll be used as the leader key
@@ -58,9 +53,6 @@ return function()
 
 	-- vnoremap("<A-j>", ":m '>+1<CR>gv=gv")
 	-- vnoremap("<A-k>", ":m '<-2<CR>gv=gv")
-
-	-- Paste without losing the contents of the register
-	xnoremap("<leader>p", '"_dP')
 
 	-- Reselect the last visual selection
 	xnoremap("<<", function()
