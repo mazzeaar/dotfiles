@@ -72,11 +72,8 @@ vim.opt.foldcolumn = "0"
 vim.opt.foldnestmax = 5
 vim.opt.foldtext = ""
 
--- Always keep 8 lines above/below cursor unless at start/end of file
-vim.opt.scrolloff = 8
-
--- Place a column line
--- vim.opt.colorcolumn = "80"
+-- Keep <X> lines above/below cursor unless at start/end of file
+vim.opt.scrolloff = 14
 
 vim.opt.guicursor = {
 	"n-v-c:block", -- Normal, visual, command-line: block cursor
