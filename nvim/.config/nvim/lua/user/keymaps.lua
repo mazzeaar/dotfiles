@@ -103,6 +103,10 @@ nnoremap("<leader>4", function()
 	harpoon_ui.nav_file(4)
 end, { desc = "Harpoon: jump 4" })
 
+nnoremap("<leader>5", function()
+	harpoon_ui.nav_file(5)
+end, { desc = "Harpoon: jump 5" })
+
 -- === TELESCOPE ===
 local telescope = require("telescope.builtin")
 
