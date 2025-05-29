@@ -51,7 +51,7 @@ vim.opt.foldtext = ""
 vim.opt.mouse = "a"        -- Enable mouse in all modes
 vim.opt.updatetime = 100   -- Update time to make vim feel nicer
 vim.opt.timeoutlen = 300   -- Make LSP snappier
-vim.opt.colorcolumn = "80" -- Place bar to encourage good line length
+vim.opt.colorcolumn = "100" -- Place bar to encourage good line length
 
 -- Clipboard
 vim.opt.clipboard = 'unnamedplus' -- Use system clipboard
