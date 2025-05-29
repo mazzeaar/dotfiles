@@ -3,9 +3,26 @@ local vnoremap = require("user.keymap-utils").vnoremap
 local tnoremap = require("user.keymap-utils").tnoremap
 
 
+-- ==== Quality of life shortcuts ====
+nnoremap("<leader>w", "<cmd>w<cr>", { desc = "Quick save", silent = false })
+nnoremap("<leader>q", "<cmd>q<cr>", { desc = "Quick exit", silent = false })
+vnoremap("<leader>p", '"_dP', { desc = "Paste without losing buffer content" })
+nnoremap("U", "<C-r>", { desc = "Redo" })
+
+nnoremap("<leader>'", "<C-^>", { desc = "Switch to last buffer" })
+
+nnoremap("<leader>e",
+    function() require("oil").toggle_float() end, { desc = "Open file tree" })
+
+vnoremap("<", "<gv", { desc = "Indent left" })
+vnoremap(">", ">gv", { desc = "Indent right" })
+
+nnoremap("<leader>hs", "<cmd>split<cr>", { desc = "Horizontal split" })
+nnoremap("<leader>vs", "<cmd>vsplit<cr>", { desc = "Vertical split" })
+
+
 -- ==== terminal keymaps ====
 tnoremap("<esc>", [[<C-\><C-n>]], { desc = "Terminal: normal mode" })
-
 tnoremap("<C-h>", [[<Cmd>wincmd h<CR>]], { desc = "Window: left" })
 tnoremap("<C-l>", [[<Cmd>wincmd l<CR>]], { desc = "Window: right" })
 tnoremap("<C-j>", [[<Cmd>wincmd j<CR>]], { desc = "Window: down" })
@@ -48,13 +65,7 @@ end)
 
 -- ==== General keymaps =====
 nnoremap("<leader>no", ":nohlsearch<CR>",
-    { desc = " Clear search highlight ", silent = true })
-
-nnoremap("L", "$", { desc = "Jump to end of line" })
-vnoremap("L", "$", { desc = "Jump to end of line" })
-nnoremap("H", "^", { desc = "Jump to start of line" })
-vnoremap("H", "^", { desc = "Jump to start of line" })
-nnoremap("U", "<C-r>", { desc = "Redo" })
+    { desc = "Clear search highlight ", silent = true })
 
 
 -- ==== Folding ====
@@ -66,23 +77,6 @@ nnoremap("K", function()
         vim.cmd("stopinsert")
     end
 end, { desc = "Peek folded lines" })
-
-
--- ==== Quality of life shortcuts ====
-nnoremap("<leader>w", "<cmd>w<cr>", { desc = " Quick save", silent = false })
-nnoremap("<leader>q", "<cmd>q<cr>", { desc = " Quick exit", silent = false })
-vnoremap("<leader>p", '"_dP', { desc = "Paste without losing buffer content" })
-
-nnoremap("<leader>'", "<C-^>", { desc = "Switch to last buffer" })
-
-nnoremap("<leader>e",
-    function() require("oil").toggle_float() end, { desc = "Open file tree" })
-
-vnoremap("<", "<gv", { desc = "Better indent left" })
-vnoremap(">", ">gv", { desc = "Better indent right" })
-
-nnoremap("<leader>hs", "<cmd>split<cr>", { desc = " Horizontal split" })
-nnoremap("<leader>vs", "<cmd>vsplit<cr>", { desc = " Vertical split" })
 
 
 -- ==== Harpoon ====
@@ -142,9 +136,10 @@ nnoremap("<leader>gb", function() snacks.git.blame_line() end, { desc = "[G]it [
 nnoremap("<leader>nh", function() snacks.notifier.show_history() end, { desc = "Show [N]otifier [H]istory" })
 
 
--- ==== Mason/Lsp ====
-nnoremap("<leader>cm", "<cmd>Mason<cr>", { desc = "Mason" })
-nnoremap("<leader>so", "<cmd>Outline<cr>)", { desc = "Symbols Outline" })
+-- ==== Lsp ====
+nnoremap("<leader>td", function()
+    vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, { desc = "Toggle diagnostic" })
 
 nnoremap("<leader>nd", function()
     vim.diagnostic.jump({ count = 1, float = true })
