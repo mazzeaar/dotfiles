@@ -6,7 +6,6 @@ return {
             require("nvim-treesitter.configs").setup({
                 -- A list of parser names, or "all"
                 ensure_installed = {
-                    -- Core languages for C/C++/HPC development
                     "c",
                     "cpp",
                     "cuda",
@@ -15,8 +14,6 @@ return {
                     "fortran",
                     "meson",
                     "julia",
-
-                    -- Supporting languages
                     "lua",
                     "vim",
                     "bash",
