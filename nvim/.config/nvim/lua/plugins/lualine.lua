@@ -1,72 +1,86 @@
--- nvim/lua/plugins/lualine.lua
-
 return {
-	{
-		"nvim-lualine/lualine.nvim",
-		event = "VeryLazy",
-		config = function()
-			local function truncate_branch_name(branch)
-				if not branch or branch == "" then
-					return ""
-				end
+    {
+        "nvim-lualine/lualine.nvim",
+        dependencies = {
+            "nvim-tree/nvim-web-devicons"
+        },
+        config = function()
+            local function harpoon_component()
+                local harpoon = require("harpoon")
 
-				-- Match the branch name to the specified format
-				local user, team, ticket_number = string.match(branch, "^(%w+)/(%w+)%-(%d+)")
+                -- Get the list object and its items
+                local list = harpoon:list()
+                local harpoon_items = list.items
 
-				-- If the branch name matches the format, display {user}/{team}-{ticket_number}, otherwise display the full branch name
-				if ticket_number then
-					return user .. "/" .. team .. "-" .. ticket_number
-				else
-					return branch
-				end
-			end
+                -- Get total number of marks
+                local total_marks = #harpoon_items
 
-			local function harpoon_component()
-				local harpoon = require("harpoon.mark")
-				local total_marks = harpoon.get_length()
+                if total_marks == 0 then
+                    return ""
+                end
 
-				if total_marks == 0 then
-					return ""
-				end
+                local current_mark = "—"
 
-				local current_mark = "—"
+                -- Get current file path using the same method as harpoon-lualine
+                local current_file_path = vim.api.nvim_buf_get_name(0)
+                local root_dir = list.config:get_root_dir()
 
-				local mark_idx = harpoon.get_current_index()
-				if mark_idx ~= nil then
-					current_mark = tostring(mark_idx)
-				end
+                -- Find the current file in the harpoon items
+                for i = 1, total_marks do
+                    local harpoon_item = harpoon_items[i]
+                    if harpoon_item then
+                        local harpoon_path = harpoon_item.value
 
-				return string.format("󱡅 %s/%d", current_mark, total_marks)
-			end
+                        local full_path = harpoon_path
+                        -- Handle relative paths if needed
+                        if harpoon_path:sub(1, 1) ~= "/" and harpoon_path:sub(2, 2) ~= ":" then
+                            full_path = root_dir .. "/" .. harpoon_path
+                        end
 
-			require("lualine").setup({
-				options = {
-					theme = "catppuccin",
-					globalstatus = true,
-					component_separators = { left = "", right = "" },
-					section_separators = { left = "█", right = "█" },
-				},
+                        if full_path == current_file_path then
+                            current_mark = tostring(i)
+                            break
+                        end
+                    end
+                end
 
-				sections = {
-					-- git and harpoon infos
-					lualine_b = {
-						{ "branch", icon = "", fmt = truncate_branch_name },
-						harpoon_component,
-						"diff",
-						"diagnostics",
-					},
+                return string.format("󱡅 %s/%d", current_mark, total_marks)
+            end
 
-					-- current file path
-					lualine_c = {
-						{ "filename", path = 1 },
-					},
+            local function lsp_clients()
+                local buf = vim.api.nvim_get_current_buf()
+                local clients = vim.lsp.get_clients({ bufnr = buf })
 
-					-- filetype
-					lualine_x = {
-						"filetype",
-					},
-				},
-			})
-		end,
-	},
+                if #clients == 0 then
+                    return ""
+                end
+                local client_names = {}
+                for _, client in ipairs(clients) do
+                    table.insert(client_names, client.name)
+                end
+
+                return " " .. table.concat(client_names, ", ")
+            end
+
+            require("lualine").setup({
+                options = {
+                    theme = "catppuccin",
+                },
+                sections = {
+                    lualine_b = {
+                        "branch",
+                        "diff",
+                        "diagnostics",
+                        harpoon_component,
+                    },
+
+                    lualine_x = {
+                        lsp_clients,
+                        'encoding',
+                        'filetype',
+                    },
+                }
+            })
+        end
+    },
 }

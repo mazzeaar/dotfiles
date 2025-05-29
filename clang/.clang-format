@@ -15,9 +15,10 @@ AllowShortLoopsOnASingleLine: true
 AlwaysBreakBeforeMultilineStrings: false
 AlwaysBreakTemplateDeclarations: MultiLine
 BreakBeforeTernaryOperators: true
+
 CompactNamespaces: true
-ConstructorInitializerAllOnOneLineOrOnePerLine: false
 FixNamespaceComments: true
+ConstructorInitializerAllOnOneLineOrOnePerLine: false
 IndentCaseLabels: true
 IndentWrappedFunctionNames: true
 KeepEmptyLinesAtTheStartOfBlocks: false
@@ -28,10 +29,9 @@ SortUsingDeclarations: false
 
 SpaceAfterCStyleCast: true
 SpaceAfterTemplateKeyword: true
-
 SpaceBeforeAssignmentOperators: true
 SpaceBeforeCpp11BracedList: false
 SpaceBeforeCtorInitializerColon: true
 SpaceBeforeInheritanceColon: true
-SpaceBeforeParens: ControlStatements
 SpaceBeforeRangeBasedForLoopColon: true
+SpaceBeforeParens: ControlStatements

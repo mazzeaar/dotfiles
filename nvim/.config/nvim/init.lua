@@ -1,7 +1,10 @@
--- nvim/init.lua
-
--- nvim/lua/init.lua
-
--- nvim/init.lua
-
 require("user")
+
+local lsp_configs = {}
+
+for _, f in pairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do
+    local server_name = vim.fn.fnamemodify(f, ":t:r")
+    table.insert(lsp_configs, server_name)
+end
+
+vim.lsp.enable(lsp_configs)
