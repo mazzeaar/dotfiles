@@ -1,3 +1,4 @@
+require("user.lsp-utils")
 require("user.vim-options")
 require("user.lazy")
 require("user.highlight_yank")

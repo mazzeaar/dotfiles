@@ -48,34 +48,13 @@ vim.opt.foldnestmax = 5
 vim.opt.foldtext = ""
 
 -- Quality of life improvements
-vim.opt.mouse = "a"        -- Enable mouse in all modes
-vim.opt.updatetime = 100   -- Update time to make vim feel nicer
-vim.opt.timeoutlen = 300   -- Make LSP snappier
+vim.opt.mouse = "a"         -- Enable mouse in all modes
+vim.opt.updatetime = 100    -- Update time to make vim feel nicer
+vim.opt.timeoutlen = 300    -- Make LSP snappier
 vim.opt.colorcolumn = "100" -- Place bar to encourage good line length
 
 -- Clipboard
 vim.opt.clipboard = 'unnamedplus' -- Use system clipboard
-
--- Simple diagnostic configuration
-vim.diagnostic.config({
-    -- Enable virtual text (diagnostics appear at the end of the line)
-    virtual_text = true,
-
-    -- Disable virtual lines
-    virtual_lines = false,
-
-    -- Show signs in the sign column
-    signs = true,
-
-    -- Underline the text with the issue
-    underline = true,
-
-    -- Don't update diagnostics in insert mode
-    update_in_insert = false,
-
-    -- Sort diagnostics by severity
-    severity_sort = true,
-})
 
 -- Formatting on save
 vim.api.nvim_create_autocmd("BufWritePre", {

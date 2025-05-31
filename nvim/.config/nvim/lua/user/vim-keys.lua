@@ -134,30 +134,3 @@ local snacks = require("snacks")
 nnoremap("<leader>og", function() snacks.gitbrowse() end, { desc = "[O]pen [G]it" })
 nnoremap("<leader>gb", function() snacks.git.blame_line() end, { desc = "[G]it [B]lame" })
 nnoremap("<leader>nh", function() snacks.notifier.show_history() end, { desc = "Show [N]otifier [H]istory" })
-
-
--- ==== Lsp ====
-nnoremap("<leader>td", function()
-    vim.diagnostic.enable(not vim.diagnostic.is_enabled())
-end, { desc = "Toggle diagnostic" })
-
-nnoremap("<leader>nd", function()
-    vim.diagnostic.jump({ count = 1, float = true })
-end, { desc = "Goto next diagnostic" })
-nnoremap("<leader>pd", function()
-    vim.diagnostic.jump({ count = -1, float = true })
-end, { desc = "Goto previous diagnostic" })
-
-nnoremap("<leader>ne", function()
-    vim.diagnostic.jump({ count = 1, float = true, severity = { min = vim.diagnostic.severity.ERROR } })
-end, { desc = "Goto next error" })
-nnoremap("<leader>pe", function()
-    vim.diagnostic.jump({ count = -1, float = true, severity = { min = vim.diagnostic.severity.ERROR } })
-end, { desc = "Goto previous error" })
-
-nnoremap("<leader>nw", function()
-    vim.diagnostic.jump({ count = 1, float = true, severity = { min = vim.diagnostic.severity.WARN } })
-end, { desc = "Goto next warning" })
-nnoremap("<leader>pw", function()
-    vim.diagnostic.jump({ count = -1, float = true, severity = { min = vim.diagnostic.severity.WARN } })
-end, { desc = "Goto previous warning" })
