@@ -3,6 +3,8 @@ autoload -Uz compinit
 compinit
 
 bindkey -v
+bindkey -v '^?' backward-delete-char
+
 export KEYTIMEOUT=1
 
 #initialize starship
@@ -24,3 +26,6 @@ export FZF_DEFAULT_OPTS=" \
 --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
 --color=selected-bg:#45475a \
 --multi"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
