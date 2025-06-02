@@ -92,6 +92,8 @@ local snacks_map = map_util.curry_map("<leader>", "Snacks")
 snacks_map("og", function() snacks.gitbrowse() end, { desc = "Open Git" })
 snacks_map("gb", function() snacks.git.blame_line() end, { desc = "Git Blame Line" })
 snacks_map("nh", function() snacks.notifier.show_history() end, { desc = "Notifier History" })
+snacks_map("nh", function() snacks.notifier.show_history() end, { desc = "Notifier History" })
+snacks_map("z", function() snacks.toggle.dim():toggle() end, { desc = "Zen Mode" })
 
 
 -- ==== LSP ====
