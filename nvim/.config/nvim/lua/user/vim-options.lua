@@ -69,3 +69,22 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         end
     end,
 })
+
+-- Diagnostic Config
+vim.diagnostic.config {
+    severity_sort = true,
+    virtual_text = false,
+    virtual_lines = false,
+
+    float = { border = 'rounded', source = 'if_many' },
+    underline = { severity = vim.diagnostic.severity.ERROR },
+
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = '󰅚 ',
+            [vim.diagnostic.severity.WARN] = '󰀪 ',
+            [vim.diagnostic.severity.INFO] = '󰋽 ',
+            [vim.diagnostic.severity.HINT] = '󰌶 ',
+        },
+    },
+}
