@@ -2,10 +2,9 @@ return {
     {
         'saghen/blink.cmp',
 
-        dependencies = {
-            'rafamadriz/friendly-snippets',
-        },
+        dependencies = { 'rafamadriz/friendly-snippets' },
         version = '1.*',
+
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
@@ -48,10 +47,10 @@ return {
 
     {
         'saghen/blink.pairs',
-        -- download prebuilt binaries from github releases
-        dependencies = { 'saghen/blink.download' },
 
-        version = '1.*', -- (recommended) only required with prebuilt binaries
+        dependencies = 'saghen/blink.download',
+        version = '0.*',
+
         --- @module 'blink.pairs'
         --- @type blink.pairs.Config
         opts = {
