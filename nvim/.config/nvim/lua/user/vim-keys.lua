@@ -96,6 +96,9 @@ snacks_map("nh", function() snacks.notifier.show_history() end, { desc = "Notifi
 snacks_map("z", function() snacks.toggle.dim():toggle() end, { desc = "Zen Mode" })
 
 
+-- ==== render-markdown ====
+nnoremap("<leader>tm", function() require("render-markdown").toggle() end, { desc = "Toggle render-markdown" })
+
 -- ==== LSP ====
 local lsp_utils = require("user.utils.lsp")
 
