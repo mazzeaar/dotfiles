@@ -10,7 +10,6 @@ return {
     offsetEncoding = { 'utf-8', 'utf-16' },
 
     root_markers = {
-        'CMakeLists.txt',
         'build/'
     },
 
