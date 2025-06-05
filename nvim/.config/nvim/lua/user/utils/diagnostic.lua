@@ -14,9 +14,9 @@ function M.toggle_virtual_lines()
     })
 
     if virtual_lines_enabled then
-        vim.notify("Disabled virtual lines")
-    else
         vim.notify("Enabled virtual lines")
+    else
+        vim.notify("Disabled virtual lines")
     end
 end
 
