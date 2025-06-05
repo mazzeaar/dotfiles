@@ -9,7 +9,7 @@ M.lsp_multi_map = map.curry_map("", "LSP", { "n", "x" })
 M.goto_map = function(key, func, desc) M.lsp_map("<leader>g" .. key, func, "Goto " .. desc) end
 
 local function diagnostic_jump_map(key, count, label, severity)
-    M.goto_map(key, function()
+    M.lsp_map(key, function()
         vim.diagnostic.jump({
             count = count,
             float = true,

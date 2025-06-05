@@ -130,6 +130,5 @@ lsp_map('<leader>D', telescope.lsp_type_definitions, 'Type Definition')
 lsp_map('<leader>ds', telescope.lsp_document_symbols, 'Document Symbols')
 lsp_map('<leader>ws', telescope.lsp_dynamic_workspace_symbols, 'Workspace Symbols')
 
-
 default_map("td", function() require("user.utils.diagnostic").toggle_virtual_lines() end,
     { desc = "Toggle Virtual Lines" })
