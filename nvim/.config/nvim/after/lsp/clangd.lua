@@ -25,9 +25,5 @@ return {
         },
     },
 
-    on_attach = function()
-        vim.api.nvim_buf_create_user_command(0, 'What', function()
-            print("its working wtf?")
-        end, { desc = 'testing stuff' })
-    end
+    on_attach = function() end
 }
