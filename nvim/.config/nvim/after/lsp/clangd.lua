@@ -2,8 +2,12 @@ return {
     cmd = {
         'clangd',
         '--clang-tidy',
+        '--header-insertion=never',
+        '--all-scopes-completion',
         '--background-index',
-        '--offset-encoding=utf-8',
+        '--compile-commands-dir=build',
+        -- '--enable-config',
+        '--log=verbose'
     },
 
     filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
