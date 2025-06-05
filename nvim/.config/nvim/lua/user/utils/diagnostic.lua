@@ -12,6 +12,12 @@ function M.toggle_virtual_lines()
             spacing = 4,
         } or false,
     })
+
+    if virtual_lines_enabled then
+        vim.notify("Disabled virtual lines")
+    else
+        vim.notify("Enabled virtual lines")
+    end
 end
 
 return M
