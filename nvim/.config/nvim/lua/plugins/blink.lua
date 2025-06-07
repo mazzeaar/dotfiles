@@ -1,9 +1,8 @@
 return {
     {
         'saghen/blink.cmp',
-
         dependencies = { 'rafamadriz/friendly-snippets' },
-        version = '1.*',
+        version = '*',
 
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
@@ -46,10 +45,16 @@ return {
     },
 
     {
+        --[[ use local version for now until saghen fixes blink.pairs
         'saghen/blink.pairs',
-
         dependencies = 'saghen/blink.download',
-        version = '0.*',
+        version = '*',
+        ]] --
+
+        dir = "~/.config/nvim/local_plugins/blink.pairs",
+        name = "blink.pairs",
+        dependencies = 'saghen/blink.download',
+        dev = true,
 
         --- @module 'blink.pairs'
         --- @type blink.pairs.Config
