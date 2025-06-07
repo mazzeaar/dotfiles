@@ -10,3 +10,5 @@ export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/b
 # Docker CLI
 export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin"
 
+# Rust
+export PATH="$HOME/.cargo/bin:$PATH"
