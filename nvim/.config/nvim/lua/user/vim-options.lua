@@ -88,3 +88,6 @@ vim.diagnostic.config {
         },
     },
 }
+
+-- disable lsp logs as they get huge and all lsps send to cerr anyway :,)
+vim.lsp.set_log_level(vim.log.levels.OFF)
