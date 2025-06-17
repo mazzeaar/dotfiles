@@ -1,3 +1,10 @@
+-- custom highlight colors
+vim.api.nvim_set_hl(0, "hl_group1", { fg = "#5fd7ba" }) -- Soft Mint Cyan
+vim.api.nvim_set_hl(0, "hl_group2", { fg = "#9580ff" }) -- Soft Lavender Indigo
+vim.api.nvim_set_hl(0, "hl_group3", { fg = "#e0b458" }) -- Amber Gold: warm golden hue, contrasts softly
+vim.api.nvim_set_hl(0, "hl_group4", { fg = "#7ed6c2" }) -- Bright Seafoam Teal
+vim.api.nvim_set_hl(0, "hl_group5", { fg = "#c2798f" }) -- Dusty Rose: warm dusty pink, gentle on dark backgrounds
+
 return {
     {
         'saghen/blink.cmp',
@@ -45,16 +52,10 @@ return {
     },
 
     {
-        --[[ use local version for now until saghen fixes blink.pairs
         'saghen/blink.pairs',
-        dependencies = 'saghen/blink.download',
         version = '*',
-        ]] --
 
-        dir = "~/.config/nvim/local_plugins/blink.pairs",
-        name = "blink.pairs",
         dependencies = 'saghen/blink.download',
-        dev = true,
 
         --- @module 'blink.pairs'
         --- @type blink.pairs.Config
@@ -62,15 +63,19 @@ return {
             mappings = {
                 -- you can call require("blink.pairs.mappings").enable() and require("blink.pairs.mappings").disable() to enable/disable mappings at runtime
                 enabled = true,
-                -- see the defaults: https://github.com/Saghen/blink.pairs/blob/main/lua/blink/pairs/config/mappings.lua#L10
+                -- you may also disable with `vim.g.pairs = false` (global) or `vim.b.pairs = false` (per-buffer)
+                disabled_filetypes = {},
+                -- see the defaults: https://github.com/Saghen/blink.pairs/blob/main/lua/blink/pairs/config/mappings.lua#L12
                 pairs = {},
             },
             highlights = {
                 enabled = true,
                 groups = {
-                    'BlinkPairsOrange',
-                    'BlinkPairsPurple',
-                    'BlinkPairsBlue',
+                    "hl_group1",
+                    "hl_group2",
+                    "hl_group3",
+                    "hl_group4",
+                    "hl_group5",
                 },
                 matchparen = {
                     enabled = true,
