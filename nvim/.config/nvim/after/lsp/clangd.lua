@@ -1,13 +1,13 @@
 return {
     cmd = {
         'clangd',
-        '--clang-tidy',
         '--header-insertion=never',
-        '--all-scopes-completion',
-        '--background-index',
         '--compile-commands-dir=build',
-        -- '--enable-config',
-        '--log=verbose'
+        '--enable-config', -- use .clangd config
+        -- '--clang-tidy',              -- everything hungry
+        --'--all-scopes-completion',    -- cpu hungry
+        -- '--background-index',        -- ram hungry
+        -- '--log=verbose'              -- hungry hungry
     },
 
     filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
@@ -24,6 +24,4 @@ return {
             },
         },
     },
-
-    on_attach = function() end
 }
