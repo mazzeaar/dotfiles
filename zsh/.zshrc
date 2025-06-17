@@ -29,3 +29,18 @@ export FZF_DEFAULT_OPTS=" \
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+nprun() {
+    if [[ $PWD =~ "/NPDERepo/build/homeworks/.+" ]]; then
+        makep && ./*_mysolution
+    else
+        echo "nprun: Not in a valid homework directory."
+    fi
+}
+
+nptest() {
+    if [[ $PWD =~ "/NPDERepo/build/homeworks/.+" ]]; then
+        makep && ./*_test_mysolution
+    else
+        echo "nptest: Not in a valid homework directory."
+    fi
+}
