@@ -1,6 +1,4 @@
-require("user.utils.lsp")
-require("user.utils.diagnostic")
 require("user.vim-options")
 require("user.lazy")
-require("user.highlight_yank")
 require("user.vim-keys")
+require("user.utils")

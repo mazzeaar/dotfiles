@@ -1,48 +1,36 @@
-local map_util = require("user.utils.keymap")
-
-local default_map = map_util.curry_map("<leader>", "")
-local nnoremap = map_util.nnoremap
-local vnoremap = map_util.vnoremap
+local map = vim.keymap.set
+local opts = function(desc, extra)
+    return vim.tbl_extend("force", { desc = desc, noremap = true, silent = true }, extra or {})
+end
 
 -- ==== General keymaps =====
-default_map("w", "<cmd>w<cr>", { desc = "Quick Save", silent = false })
-default_map("q", "<cmd>q<cr>", { desc = "Quick Quit", silent = false })
-default_map("e", function() require("oil").toggle_float() end, { desc = "File Tree" })
-
-default_map("'", "<C-^>", { desc = "Switch to Last Buffer" })
-default_map("no", ":nohlsearch<CR>", { desc = "Clear Search", silent = true })
-default_map("ut", ":UndotreeToggle<CR>", { desc = "Undo Tree" })
-
-vnoremap("<leader>p", '"_dP', { desc = "Paste without clobbering yank" })
-vnoremap("<", "<gv", { desc = "Indent Left" })
-vnoremap(">", ">gv", { desc = "Indent Right" })
-
-nnoremap("U", "<C-r>", { desc = "Redo" })
-
-default_map("sh", function()
+map("n", "<leader>w", "<cmd>w<cr>", opts("Quick Save", { silent = false }))
+map("n", "<leader>q", "<cmd>q<cr>", opts("Quick Quit", { silent = false }))
+map("n", "<leader>e", function() require("oil").toggle_float() end, opts("File Tree"))
+map("n", "<leader>'", "<C-^>", opts("Switch to Last Buffer"))
+map("n", "<leader>no", ":nohlsearch<CR>", opts("Clear Search", { silent = true }))
+map("n", "<leader>ut", ":UndotreeToggle<CR>", opts("Undo Tree"))
+map("v", "<leader>p", '"_dP', opts("Paste without clobbering yank"))
+map("v", "<", "<gv", opts("Indent Left"))
+map("v", ">", ">gv", opts("Indent Right"))
+map("n", "U", "<C-r>", opts("Redo"))
+map("n", "<leader>sh", function()
     vim.cmd("split")
     vim.cmd("wincmd j")
-end, { desc = "Split Horizontal and Move" })
-
-default_map("sv", function()
+end, opts("Split Horizontal and Move"))
+map("n", "<leader>sv", function()
     vim.cmd("vsplit")
     vim.cmd("wincmd l")
-end, { desc = "Split Vertical and Move" })
-
+end, opts("Split Vertical and Move"))
 
 -- ==== terminal navigation ====
-local tnoremap = map_util.tnoremap
-
-tnoremap("<esc>", [[<C-\><C-n>]], { desc = "Exit Terminal Mode" })
-tnoremap("<C-h>", [[<Cmd>wincmd h<CR>]], { desc = "Move Left" })
-tnoremap("<C-j>", [[<Cmd>wincmd j<CR>]], { desc = "Move Down" })
-tnoremap("<C-k>", [[<Cmd>wincmd k<CR>]], { desc = "Move Up" })
-tnoremap("<C-l>", [[<Cmd>wincmd l<CR>]], { desc = "Move Right" })
-
+map("t", "<esc>", [[<C-\><C-n>]], opts("Exit Terminal Mode"))
+map("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts("Move Left"))
+map("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts("Move Down"))
+map("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts("Move Up"))
+map("t", "<C-l>", [[<Cmd>wincmd l<CR>]], opts("Move Right"))
 
 -- ==== TMUX navigation ====
-local tmux_map = map_util.curry_map("", "Tmux", "n")
-
 local function tmux_or_wincmd(cmd, fallback)
     return function()
         if vim.fn.exists(":" .. cmd) ~= 0 then
@@ -52,83 +40,75 @@ local function tmux_or_wincmd(cmd, fallback)
         end
     end
 end
-
-tmux_map("<C-h>", tmux_or_wincmd("NvimTmuxNavigateLeft", "h"), { desc = "Move Left" })
-tmux_map("<C-j>", tmux_or_wincmd("NvimTmuxNavigateDown", "j"), { desc = "Move Down" })
-tmux_map("<C-k>", tmux_or_wincmd("NvimTmuxNavigateUp", "k"), { desc = "Move Up" })
-tmux_map("<C-l>", tmux_or_wincmd("NvimTmuxNavigateRight", "l"), { desc = "Move Right" })
-
+map("n", "<C-h>", tmux_or_wincmd("NvimTmuxNavigateLeft", "h"), opts("Move Left"))
+map("n", "<C-j>", tmux_or_wincmd("NvimTmuxNavigateDown", "j"), opts("Move Down"))
+map("n", "<C-k>", tmux_or_wincmd("NvimTmuxNavigateUp", "k"), opts("Move Up"))
+map("n", "<C-l>", tmux_or_wincmd("NvimTmuxNavigateRight", "l"), opts("Move Right"))
 
 -- ==== Harpoon ====
 local harpoon = require("harpoon")
-local list = harpoon:list()
-local harpoon_map = map_util.curry_map("<leader>h", "Harpoon")
-
-harpoon_map("o", function() harpoon.ui:toggle_quick_menu(list) end, { desc = "Toggle UI" })
-harpoon_map("a", function() list:add() end, { desc = "Add File" })
-harpoon_map("d", function() list:remove() end, { desc = "Remove File" })
-harpoon_map("c", function() list:clear() end, { desc = "Clear List" })
+map("n", "<leader>ho", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, opts("Toggle UI"))
+map("n", "<leader>ha", function() harpoon:list():add() end, opts("Add File"))
+map("n", "<leader>hd", function() harpoon:list():remove() end, opts("Remove File"))
+map("n", "<leader>hc", function() harpoon:list():clear() end, opts("Clear List"))
 for i = 1, 5 do
-    harpoon_map(tostring(i), function() list:select(i) end, { desc = "Jump to " .. i })
+    map("n", "<leader>h" .. i, function() harpoon:list():select(i) end, opts("Jump to " .. i))
 end
-
-
--- ==== Telescope ====
-local telescope = require("telescope.builtin")
-local telescope_map = map_util.curry_map("<leader>f", "Telescope")
-
-telescope_map("f", telescope.find_files, { desc = "Find Files" })
-telescope_map("g", telescope.live_grep, { desc = "Live Grep" })
-telescope_map("b", telescope.buffers, { desc = "Search Buffers" })
-telescope_map("h", telescope.help_tags, { desc = "Help Tags" })
-telescope_map("a", function() telescope.find_files({ hidden = true, no_ignore = true, follow = true }) end,
-    { desc = "Find All Files" })
-
 
 -- ==== Snacks ====
 local snacks = require("snacks")
-local snacks_map = map_util.curry_map("<leader>", "Snacks")
-
-snacks_map("og", function() snacks.gitbrowse() end, { desc = "Open Git" })
-snacks_map("gb", function() snacks.git.blame_line() end, { desc = "Git Blame Line" })
-snacks_map("nh", function() snacks.notifier.show_history() end, { desc = "Notifier History" })
-snacks_map("nh", function() snacks.notifier.show_history() end, { desc = "Notifier History" })
-snacks_map("z", function() snacks.toggle.dim():toggle() end, { desc = "Zen Mode" })
-
+map("n", "<leader>og", function() snacks.gitbrowse() end, opts("Open Git"))
+map("n", "<leader>gb", function() snacks.git.blame_line() end, opts("Git Blame Line"))
+map("n", "<leader>nh", function() snacks.notifier.show_history() end, opts("Notifier History"))
+map("n", "<leader>z", function() snacks.toggle.dim():toggle() end, opts("Zen Mode"))
 
 -- ==== render-markdown ====
-nnoremap("<leader>tm", function() require("render-markdown").toggle() end, { desc = "Toggle render-markdown" })
+local md_render = require("render-markdown")
+map("n", "<leader>tm", function() md_render.toggle() end, opts("Toggle render-markdown"))
+
+-- ==== Telescope ====
+local telescope = require("telescope.builtin")
+-- Search
+map("n", "<leader>ff", telescope.find_files, opts("TS: Find Files"))
+map("n", "<leader>fg", telescope.live_grep, opts("TS: Live Grep"))
+map("n", "<leader>fb", telescope.buffers, opts("TS: Search Buffers"))
+map("n", "<leader>fh", telescope.help_tags, opts("TS: Help Tags"))
+map("n", "<leader>fa", function()
+    telescope.find_files({ hidden = true, no_ignore = true, follow = true })
+end, opts("Find All Files"))
+
+-- Telescope: Lsp
+map("n", "gd", telescope.lsp_definitions, opts("Goto: Definition"))
+map("n", "gr", telescope.lsp_references, opts("Goto: References"))
+map("n", "gI", telescope.lsp_implementations, opts("Goto: Implementation"))
+map("n", "<leader>D", telescope.lsp_type_definitions, opts("Goto: Type Definition"))
+map("n", "<leader>ds", telescope.lsp_document_symbols, opts("Open: Document Symbols"))
+map("n", "<leader>ws", telescope.lsp_dynamic_workspace_symbols, opts("Open: Workspace Symbols"))
 
 -- ==== LSP ====
-local lsp_utils = require("user.utils.lsp")
+local diag_utils = require("user.utils.diagnostic")
+map("n", "<leader>fl", vim.diagnostic.setloclist, opts("Open Quickfix list"))
+map("n", "<leader>rn", vim.lsp.buf.rename, opts("LSP: Rename"))
+map("n", "gD", vim.lsp.buf.declaration, opts("Goto: Declaration"))
+map("n", "<leader>ca", vim.lsp.buf.code_action, opts("LSP: Code Action"))
+map("n", "<leader>td", function() diag_utils.toggle_virtual_lines() end,
+    opts("Toggle Virtual Lines"))
 
-local lsp_map = lsp_utils.lsp_map
-local lsp_multi_map = lsp_utils.lsp_multi_map
-local lsp_goto_map = lsp_utils.goto_map
-local jump_next = lsp_utils.jump_next
-local jump_prev = lsp_utils.jump_prev
+-- ==== LSP Diagnostic Jump ====
+local function diagnostic_jump(key, count, label, severity)
+    map("n", key, function()
+        vim.diagnostic.jump({
+            count = count,
+            float = true,
+            severity = severity and { min = severity } or nil,
+        })
+    end, opts(label))
+end
 
-jump_next("d", "Diagnostic")
-jump_prev("d", "Diagnostic")
-jump_next("e", "Error", vim.diagnostic.severity.ERROR)
-jump_prev("e", "Error", vim.diagnostic.severity.ERROR)
-jump_next("w", "Warning", vim.diagnostic.severity.WARN)
-jump_prev("w", "Warning", vim.diagnostic.severity.WARN)
-
-lsp_map('<leader>fl', vim.diagnostic.setloclist, 'Open Quickfix list')
-lsp_map('<leader>rn', vim.lsp.buf.rename, 'Rename')
-
-lsp_goto_map('D', vim.lsp.buf.declaration, 'Declaration')
-
-lsp_multi_map('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
-
-lsp_goto_map('d', telescope.lsp_definitions, 'Definition')
-lsp_goto_map('r', telescope.lsp_references, 'References')
-lsp_goto_map('I', telescope.lsp_implementations, 'Implementation')
-
-lsp_map('<leader>D', telescope.lsp_type_definitions, 'Type Definition')
-lsp_map('<leader>ds', telescope.lsp_document_symbols, 'Document Symbols')
-lsp_map('<leader>ws', telescope.lsp_dynamic_workspace_symbols, 'Workspace Symbols')
-
-default_map("td", function() require("user.utils.diagnostic").toggle_virtual_lines() end,
-    { desc = "Toggle Virtual Lines" })
+-- jump_next / jump_prev style bindings
+diagnostic_jump("<leader>nd", 1, "Next Diagnostic")
+diagnostic_jump("<leader>pd", -1, "Prev Diagnostic")
+diagnostic_jump("<leader>ne", 1, "Next Error", vim.diagnostic.severity.ERROR)
+diagnostic_jump("<leader>pe", -1, "Prev Error", vim.diagnostic.severity.ERROR)
+diagnostic_jump("<leader>nw", 1, "Next Warning", vim.diagnostic.severity.WARN)
+diagnostic_jump("<leader>pw", -1, "Prev Warning", vim.diagnostic.severity.WARN)
