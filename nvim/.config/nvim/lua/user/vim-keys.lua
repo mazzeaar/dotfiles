@@ -22,6 +22,26 @@ map("n", "<leader>sv", function()
     vim.cmd("vsplit")
     vim.cmd("wincmd l")
 end, opts("Split Vertical and Move"))
+map("n", "<leader>gx", function()
+    local url = vim.fn.expand("<cfile>")
+
+    if url:match("^www%.") then
+        url = "https://" .. url
+    end
+
+    if url:match("^https?://") then
+        local opener = vim.fn.has("macunix") == 1 and "open"
+            or vim.fn.has("unix") == 1 and "xdg-open"
+            or nil
+        if opener then
+            vim.fn.jobstart({ opener, url }, { detach = true })
+        else
+            print("Don't know how to open links on this system.")
+        end
+    else
+        print("Not a valid URL under cursor: " .. url)
+    end
+end, { desc = "Open URL under cursor", silent = true })
 
 -- ==== terminal navigation ====
 map("t", "<esc>", [[<C-\><C-n>]], opts("Exit Terminal Mode"))
