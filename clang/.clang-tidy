@@ -8,7 +8,14 @@ Checks: >
   cppcoreguidelines-*,
   portability-*,
   misc-*,
-  -modernize-use-trailing-return-type
+  -modernize-use-trailing-return-type,
+  -readability-identifier-naming,
+  -readability-identifier-length,
+  -readability-magic-numbers,
+  -misc-use-internal-linkage,
+  -misc-non-private-member-variable-in-classes,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-avoid-const-or-ref-datamembers
 
 WarningsAsErrors: ''
 

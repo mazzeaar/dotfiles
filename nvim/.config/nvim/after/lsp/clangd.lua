@@ -1,12 +1,13 @@
 return {
     cmd = {
-        'clangd',
+        '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clangd',
         '--header-insertion=never',
         '--compile-commands-dir=build',
         '--enable-config', -- use .clangd config
+        '--j=8',           -- set threads
         -- '--clang-tidy',              -- everything hungry
         --'--all-scopes-completion',    -- cpu hungry
-        -- '--background-index',        -- ram hungry
+        '--background-index', -- ram hungry
         -- '--log=verbose'              -- hungry hungry
     },
 
@@ -14,7 +15,8 @@ return {
     offsetEncoding = { 'utf-8', 'utf-16' },
 
     root_markers = {
-        'build/'
+        "CMakeLists.txt",
+        "build/",
     },
 
     capabilities = {

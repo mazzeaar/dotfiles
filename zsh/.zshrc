@@ -8,13 +8,24 @@ bindkey -v '^?' backward-delete-char
 export KEYTIMEOUT=1
 
 #initialize starship
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
 
 #alias for parallel make
 alias makep="make -j8"
 
 #enable colors for ls
 alias ls="ls -G"
+
+alias cmake3.15="$HOME/cmake3.15/CMake.app/Contents/bin/cmake"
+alias cmake3.27="$HOME/cmake3.27/CMake.app/Contents/bin/cmake"
+
+ethvpn() {
+  sudo -E openconnect \
+    --protocol=anyconnect \
+    --authgroup=student-net \
+    --user='amazzetta@student-net.ethz.ch' \
+    sslvpn.ethz.ch
+}
 
 #enable lowercase insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -26,21 +37,3 @@ export FZF_DEFAULT_OPTS=" \
 --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
 --color=selected-bg:#45475a \
 --multi"
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-nprun() {
-    if [[ $PWD =~ "/NPDERepo/build/homeworks/.+" ]]; then
-        makep && ./*_mysolution
-    else
-        echo "nprun: Not in a valid homework directory."
-    fi
-}
-
-nptest() {
-    if [[ $PWD =~ "/NPDERepo/build/homeworks/.+" ]]; then
-        makep && ./*_test_mysolution
-    else
-        echo "nptest: Not in a valid homework directory."
-    fi
-}

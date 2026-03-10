@@ -12,7 +12,7 @@ return {
             indent = { enabled = true },
             notifier = { enabled = true, timeout = 3000, },
             quickfile = { enabled = true },
-            scroll = { enabled = true },
+            scroll = { enabled = false },
             zen = { enabled = true },
         },
     }
