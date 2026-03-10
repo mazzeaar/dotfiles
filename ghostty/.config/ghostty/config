@@ -1,2 +1,3 @@
 theme = catppuccin-mocha.conf
 font-family = MesloLGS NF Regular
+term = xterm-256color
