@@ -14,6 +14,7 @@ Checks: >
   -readability-magic-numbers,
   -misc-use-internal-linkage,
   -misc-non-private-member-variable-in-classes,
+  -cppcoreguidelines-non-private-member-variables-in-classes,
   -cppcoreguidelines-avoid-magic-numbers,
   -cppcoreguidelines-avoid-const-or-ref-datamembers
 
