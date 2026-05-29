@@ -9,15 +9,6 @@ end
 
 vim.lsp.enable(lsp_configs)
 
-vim.diagnostic.config({
-    virtual_text = false,
-    virtual_lines = false,
-    severity_sort = true,
-    float = {
-        border = "rounded",
-    },
-})
-
 local function diagnostic_jump(count, severity)
     return function()
         vim.diagnostic.jump({

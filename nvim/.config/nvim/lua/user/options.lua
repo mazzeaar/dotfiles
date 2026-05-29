@@ -55,25 +55,6 @@ vim.opt.colorcolumn = "100" -- Place bar to encourage good line length
 -- Clipboard
 vim.opt.clipboard = 'unnamedplus' -- Use system clipboard
 
--- Diagnostic Config
-vim.diagnostic.config {
-    severity_sort = true,
-    virtual_text = false,
-    virtual_lines = false,
-
-    float = { border = 'rounded', source = 'if_many' },
-    underline = { severity = vim.diagnostic.severity.ERROR },
-
-    signs = {
-        text = {
-            [vim.diagnostic.severity.ERROR] = '󰅚 ',
-            [vim.diagnostic.severity.WARN] = '󰀪 ',
-            [vim.diagnostic.severity.INFO] = '󰋽 ',
-            [vim.diagnostic.severity.HINT] = '󰌶 ',
-        },
-    },
-}
-
 -- disable lsp logs as they get huge and all lsps send to cerr anyway :,)
 -- vim.lsp.set_log_level(vim.log.levels.OFF)
 
