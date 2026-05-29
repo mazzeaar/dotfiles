@@ -1,7 +1,6 @@
 -- Basic setting
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-vim.g.background = "light"
 
 -- Indentation
 vim.opt.expandtab = true   -- Convert tabs to spaces
