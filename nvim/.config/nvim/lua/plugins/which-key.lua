@@ -1,11 +1,7 @@
 return {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    opts = {
-        spec = {
-            { "<leader>x", group = "Trouble" }
-        }
-    },
+    opts = {},
     keys = {
         {
             "<leader>?",
@@ -14,6 +10,5 @@ return {
             end,
             desc = "Which-key?",
         },
-        { "<leader>x", group = "+Trouble" }
     },
 }
