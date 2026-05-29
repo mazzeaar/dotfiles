@@ -3,6 +3,9 @@ return {
     dependencies = {
         "nvim-tree/nvim-web-devicons"
     },
+    options = {
+        theme = "auto",
+    },
     config = function()
         local function harpoon_component()
             local harpoon = require("harpoon")
