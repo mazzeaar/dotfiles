@@ -3,9 +3,6 @@ return {
     dependencies = {
         "nvim-tree/nvim-web-devicons"
     },
-    options = {
-        theme = "auto",
-    },
     config = function()
         local function harpoon_component()
             local harpoon = require("harpoon")
@@ -60,6 +57,9 @@ return {
         end
 
         require("lualine").setup({
+            options = {
+                theme = "auto",
+            },
             sections = {
                 lualine_b = {
                     "branch",
