@@ -48,11 +48,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("n", "<leader>td", diag_utils.toggle_virtual_lines, opts("Toggle Virtual Lines"))
 
 		map("n", "<leader>nd", diagnostic_jump(1), opts("Next Diagnostic"))
-		map("n", "<leader>pd", diagnostic_jump(-1), opts("Prev Diagnostic"))
+		map("n", "<leader>Nd", diagnostic_jump(-1), opts("Prev Diagnostic"))
 		map("n", "<leader>ne", diagnostic_jump(1, vim.diagnostic.severity.ERROR), opts("Next Error"))
-		map("n", "<leader>pe", diagnostic_jump(-1, vim.diagnostic.severity.ERROR), opts("Prev Error"))
-		map("n", "<leader>nw", diagnostic_jump(1, vim.diagnostic.severity.WARN), opts("Next Warning"))
-		map("n", "<leader>pw", diagnostic_jump(-1, vim.diagnostic.severity.WARN), opts("Prev Warning"))
+		map("n", "<leader>Ne", diagnostic_jump(-1, vim.diagnostic.severity.ERROR), opts("Prev Error"))
 
 		-- Inlay hints
 		if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then

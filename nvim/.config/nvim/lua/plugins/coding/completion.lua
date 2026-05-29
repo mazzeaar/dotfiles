@@ -1,46 +1,42 @@
 return {
-    "saghen/blink.cmp",
-    version = "1.*",
+	"saghen/blink.cmp",
+	version = "1.*",
 
-    dependencies = {
-        "rafamadriz/friendly-snippets",
-    },
+	opts = {
+		keymap = {
+			["<C-y>"] = { "accept", "fallback" },
+			["<C-j>"] = { "select_next", "fallback" },
+			["<C-k>"] = { "select_prev", "fallback" },
+		},
 
-    opts = {
-        keymap = {
-            ["<Tab>"] = { "accept", "fallback" },
-            ["<C-j>"] = { "select_next", "fallback" },
-            ["<C-k>"] = { "select_prev", "fallback" },
-        },
+		appearance = {
+			nerd_font_variant = "mono",
+		},
 
-        appearance = {
-            nerd_font_variant = "mono",
-        },
+		completion = {
+			documentation = {
+				auto_show = true,
+			},
+		},
 
-        completion = {
-            documentation = {
-                auto_show = true,
-            },
-        },
+		signature = {
+			enabled = true,
+			window = {
+				show_documentation = true,
+			},
+		},
 
-        signature = {
-            enabled = true,
-            window = {
-                show_documentation = true,
-            },
-        },
+		sources = {
+			default = {
+				"lsp",
+				"path",
+				"snippets",
+				"buffer",
+			},
+		},
+	},
 
-        sources = {
-            default = {
-                "lsp",
-                "path",
-                "snippets",
-                "buffer",
-            },
-        },
-    },
-
-    opts_extend = {
-        "sources.default",
-    },
+	opts_extend = {
+		"sources.default",
+	},
 }
