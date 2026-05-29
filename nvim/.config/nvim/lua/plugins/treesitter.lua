@@ -5,19 +5,25 @@ return {
         require("nvim-treesitter.configs").setup({
             -- A list of parser names, or "all"
             ensure_installed = {
+                "bash",
                 "c",
+                "cmake",
                 "cpp",
                 "cuda",
-                "cmake",
-                "make",
+                "dockerfile",
                 "fortran",
-                "meson",
-                "julia",
+                "gitcommit",
+                "gitignore",
+                "json",
+                "jsonc",
                 "lua",
-                "vim",
-                "bash",
-                "python",
+                "make",
                 "markdown",
+                "meson",
+                "python",
+                "regex",
+                "toml",
+                "vim",
                 "yaml",
             },
 
@@ -36,7 +42,7 @@ return {
                 enable = true,
                 -- Disable highlighting for large files
                 disable = function(lang, buf)
-                    local max_filesize = 100 * 1024     -- 100 KB
+                    local max_filesize = 100 * 1024 -- 100 KB
                     local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
                     if ok and stats and stats.size > max_filesize then
                         return true

@@ -1,19 +1,45 @@
 return {
-    "williamboman/mason.nvim",
-    dependencies = {
-        "williamboman/mason-lspconfig.nvim",
+    {
+        "williamboman/mason.nvim",
+        opts = {},
     },
-    config = function()
-        require("mason").setup()
-        require("mason-lspconfig").setup({
+
+    {
+        "williamboman/mason-lspconfig.nvim",
+        dependencies = {
+            "williamboman/mason.nvim",
+        },
+        opts = {
             ensure_installed = {
                 "bashls",
-                "jsonls",
                 "lua_ls",
                 "pyright",
-                "clangd"
+                "clangd",
+                "cmake",
+                "texlab",
             },
-            automatic_installation = true,
-        })
-    end
+            automatic_installation = false,
+        },
+    },
+
+    {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        dependencies = {
+            "williamboman/mason.nvim",
+        },
+        opts = {
+            ensure_installed = {
+                -- linters
+                "shellcheck",
+                "ruff",
+                "checkmake",
+
+                -- formatters
+                "shfmt",
+                "stylua",
+                "clang-format",
+                "cmakelang",
+            },
+        },
+    },
 }
