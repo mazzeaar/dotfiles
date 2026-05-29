@@ -2,7 +2,15 @@ return {
     {
         "mason-org/mason-lspconfig.nvim",
         opts = {
-            ensure_installed = { "lua_ls", "clangd", "pyright", "rust_analyzer", "cmake", "html" },
+            ensure_installed = {
+                "lua_ls",
+                "clangd",
+                "pyright",
+                "rust_analyzer",
+                "cmake",
+                "html",
+                "bashls",
+            },
         },
         dependencies = {
             {
@@ -10,8 +18,8 @@ return {
                 opts = {
                     ui = {
                         border = "rounded",
-                    }
-                }
+                    },
+                },
             },
             "neovim/nvim-lspconfig",
             { "j-hui/fidget.nvim", opts = {} },
@@ -19,10 +27,13 @@ return {
                 "hedyhli/outline.nvim",
                 lazy = true,
                 cmd = { "Outline" },
-                opts = {
-                    -- Your setup opts here
-                },
+                opts = {},
             },
         },
-    }
+        config = function(_, opts)
+            require("mason-lspconfig").setup(opts)
+
+            vim.lsp.enable("julials")
+        end,
+    },
 }

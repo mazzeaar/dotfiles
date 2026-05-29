@@ -1,29 +1,34 @@
 return {
     cmd = {
-        '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clangd',
-        '--header-insertion=never',
-        '--compile-commands-dir=build',
-        '--enable-config', -- use .clangd config
-        '--j=8',           -- set threads
-        -- '--clang-tidy',              -- everything hungry
-        --'--all-scopes-completion',    -- cpu hungry
-        '--background-index', -- ram hungry
-        -- '--log=verbose'              -- hungry hungry
+        "clangd",
+        "--clang-tidy",
+        "--header-insertion=iwyu",
+        "--completion-style=detailed",
+        "--fallback-style=none",
+        "--function-arg-placeholders=false",
+        "--log=verbose",
     },
+    -- cmd = {
+    --     'clangd',
+    --     '--header-insertion=never',
+    --     '--enable-config',    -- use .clangd config
+    --     '--j=8',              -- set threads
+    --     '--background-index', -- ram hungry
+    --     '--compile-commands-dir=build',
+    --     -- '--clang-tidy',       -- everything hungry
+    --     --'--all-scopes-completion',    -- cpu hungry
+    --     -- '--log=verbose'              -- hungry hungry
+    -- },
 
     filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
     offsetEncoding = { 'utf-8', 'utf-16' },
 
     root_markers = {
-        "CMakeLists.txt",
-        "build/",
-    },
-
-    capabilities = {
-        textDocument = {
-            completion = {
-                editsNearCursor = true,
-            },
-        },
+        'compile_commands.json',
+        'compile_flags.txt',
+        '.clangd',
+        'Makefile',
+        'CMakeLists.txt',
+        '.git',
     },
 }
