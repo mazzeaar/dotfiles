@@ -40,7 +40,7 @@ return {
             },
         }
 
-        for i = 1, 5 do
+        for i = 1, num_jump_keys do
             table.insert(keys, {
                 "<leader>h" .. i,
                 function()
