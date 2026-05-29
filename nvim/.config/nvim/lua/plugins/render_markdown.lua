@@ -14,5 +14,14 @@ return {
             },
         },
         ft = { "markdown", "norg", "rmd", "org" },
+        keys = {
+            {
+                "<leader>tm",
+                function()
+                    require("render-markdown").toggle()
+                end,
+                desc = "Toggle render-markdown",
+            },
+        },
     },
 }
