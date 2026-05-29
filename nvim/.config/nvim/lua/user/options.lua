@@ -2,11 +2,10 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.background = "light"
-vim.opt.termguicolors = true
 
 -- Indentation
 vim.opt.expandtab = true   -- Convert tabs to spaces
-vim.opt.tabstop = 4        -- Insert 2 spaces for a tab
+vim.opt.tabstop = 4
 vim.opt.softtabstop = 4    -- Number of spaces tabs count for while editing
 vim.opt.shiftwidth = 4     -- Number of spaces for autoindent
 vim.opt.smartindent = true -- Make indenting smart
@@ -32,12 +31,12 @@ vim.opt.smartcase = true  -- Override ignorecase if search pattern has uppercase
 vim.opt.incsearch = true  -- Show search matches as you type
 
 -- UI config
-vim.opt.termguicolors = true -- Enable 24-bit RGB colors
-vim.opt.showmode = false     -- Don't show mode in command line
-vim.opt.scrolloff = 8        -- Minimum number of lines to keep above and below cursor
-vim.opt.sidescrolloff = 8    -- Minimum number of columns to keep left and right of cursor
-vim.opt.wrap = false         -- Display long lines as just one line
-vim.opt.cursorline = true    -- Highlight the current line
+vim.opt.termguicolors = true
+vim.opt.showmode = false  -- Don't show mode in command line
+vim.opt.scrolloff = 8     -- Minimum number of lines to keep above and below cursor
+vim.opt.sidescrolloff = 8 -- Minimum number of columns to keep left and right of cursor
+vim.opt.wrap = false      -- Display long lines as just one line
+vim.opt.cursorline = true -- Highlight the current line
 
 -- UI fold config
 vim.opt.foldlevel = 99
@@ -55,20 +54,6 @@ vim.opt.colorcolumn = "100" -- Place bar to encourage good line length
 
 -- Clipboard
 vim.opt.clipboard = 'unnamedplus' -- Use system clipboard
-
--- Formatting on save
-vim.api.nvim_create_autocmd("BufWritePre", {
-    group = vim.api.nvim_create_augroup("AutoFormat", { clear = true }),
-    callback = function()
-        -- Format only if there's at least one LSP client with formatting capability
-        if #vim.lsp.get_clients({
-                bufnr = 0,
-                method = "textDocument/formatting"
-            }) > 0 then
-            vim.lsp.buf.format({ async = false })
-        end
-    end,
-})
 
 -- Diagnostic Config
 vim.diagnostic.config {
@@ -94,3 +79,4 @@ vim.diagnostic.config {
 
 -- allow custom loading of .vimrc files for project specific settings
 vim.o.exrc = true
+vim.o.secure = true
