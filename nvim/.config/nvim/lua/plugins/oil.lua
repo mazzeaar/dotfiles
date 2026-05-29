@@ -1,10 +1,3 @@
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = "oil",
-    callback = function()
-        vim.opt_local.colorcolumn = ""
-    end,
-})
-
 return {
     "stevearc/oil.nvim",
     lazy = false,
@@ -26,15 +19,11 @@ return {
 
     opts = {
         use_default_keymaps = false,
-
         keymaps = {
             ["g?"] = "actions.show_help",
             ["<CR>"] = "actions.select",
             ["<C-\\>"] = "actions.select_split",
-
-            -- More reliable than <C-enter>/<C-CR> in terminals
             ["<C-v>"] = "actions.select_vsplit",
-
             ["<C-t>"] = "actions.select_tab",
             ["<C-p>"] = "actions.preview",
             ["<C-c>"] = "actions.close",
@@ -47,9 +36,20 @@ return {
             ["gx"] = "actions.open_external",
             ["g."] = "actions.toggle_hidden",
         },
-
         view_options = {
             show_hidden = true,
         },
     },
+
+    config = function(_, opts)
+        require("oil").setup(opts)
+
+        vim.api.nvim_create_autocmd("FileType", {
+            group = vim.api.nvim_create_augroup("user-oil", { clear = true }),
+            pattern = "oil",
+            callback = function()
+                vim.opt_local.colorcolumn = ""
+            end,
+        })
+    end,
 }
