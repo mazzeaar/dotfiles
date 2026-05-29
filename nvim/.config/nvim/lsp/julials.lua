@@ -1,5 +1,3 @@
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-
 return {
     cmd = {
         "julia",
@@ -42,5 +40,4 @@ return {
 
     filetypes = { "julia" },
     root_markers = { "Project.toml", "JuliaProject.toml", ".git" },
-    capabilities = capabilities,
 }
