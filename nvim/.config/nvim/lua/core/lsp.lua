@@ -5,6 +5,13 @@ for _, f in pairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do
 	table.insert(lsp_configs, server_name)
 end
 
+local ok, blink = pcall(require, "blink.cmp")
+if ok then
+	vim.lsp.config("*", {
+		capabilities = blink.get_lsp_capabilities(),
+	})
+end
+
 vim.lsp.enable(lsp_configs)
 
 local function diagnostic_jump(count, severity)
@@ -48,9 +55,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("n", "<leader>td", diag_utils.toggle_virtual_lines, opts("Toggle Virtual Lines"))
 
 		map("n", "<leader>nd", diagnostic_jump(1), opts("Next Diagnostic"))
-		map("n", "<leader>Nd", diagnostic_jump(-1), opts("Prev Diagnostic"))
+		map("n", "<leader>pd", diagnostic_jump(-1), opts("Prev Diagnostic"))
 		map("n", "<leader>ne", diagnostic_jump(1, vim.diagnostic.severity.ERROR), opts("Next Error"))
-		map("n", "<leader>Ne", diagnostic_jump(-1, vim.diagnostic.severity.ERROR), opts("Prev Error"))
+		map("n", "<leader>pe", diagnostic_jump(-1, vim.diagnostic.severity.ERROR), opts("Prev Error"))
 
 		-- Inlay hints
 		if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
